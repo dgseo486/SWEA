@@ -4,40 +4,44 @@ import java.util.Scanner;
 
 public class Solution2105 { // 디저트 카페
 
-	static int[][] map = new int[21][21];
-	static boolean[][] visit;
+	static int[][] map = new int[20][20];
 	static boolean[] check;
-	static int startX = 0, startY = 0;
-	static int[][] dir = { { 1, 1 }, { -1, 1 }, { -1, -1 }, { 1, -1 } }; // 우하, 좌하, 좌상, 우상
-	static int maxDessert = -1;
-	static int N = 0;
-	
-	public static void dfs(int y, int x, int depth, int direction, int count) {
-		
-		for (int i = 0; i < 4; i++) {
-			int nextX = x + dir[i][0];
-			int nextY = y + dir[i][1];
+	static int startI = 0, startJ = 0, N = 0, maxDessert;
+	static int[][] dir = { { 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } }; // 우하, 좌하, 좌상, 우상
+
+	static void init() {
+		for (int i = 0; i < 101; i++) {
+			check[i] = false;
+		}
+	}
+
+	public static void dfs(int i, int j, int depth, int direction) {
+		for (int d = 0; d < 4; d++) {
+			int nextX = i + dir[d][0];
+			int nextY = j + dir[d][1];
 			
 			if(nextX >= 0 && nextX < N && nextY >= 0 && nextY < N) {
-				if(nextX == startX && nextY == startY && depth == 4) {
-					if(count > maxDessert) {
-						maxDessert = count;
+				
+				init();
+				
+				if(nextX == startI && nextY == startJ && depth > 3) {
+					if(depth > maxDessert) {
+						maxDessert = depth;
 					}
 					return;
 				}
 				
 				int nextDst = map[nextY][nextX];
-				if (visit[nextX][nextY] == false && check[nextDst] == false) {
-					visit[nextX][nextY] = true;
+				if (check[nextDst] == false) {
 					check[nextDst] = true;
-					
-					dfs(nextX, nextY, depth + 1, i, count + 1);
-					
-					visit[nextX][nextY] = false;
+					if(d!=direction) {
+						dfs(nextX, nextY, depth + 1, d);
+					}else {
+						dfs(nextX, nextY, depth, d);
+					}
 					check[nextDst] = false;
 				}
 			}
-			
 		}
 	}
 
@@ -48,8 +52,8 @@ public class Solution2105 { // 디저트 카페
 		for (int t = 0; t < T; t++) {
 			N = sc.nextInt();
 			check = new boolean[101];
-			visit = new boolean[21][21];
-			
+			maxDessert = -1;
+
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++) {
 					map[i][j] = sc.nextInt();
@@ -58,18 +62,9 @@ public class Solution2105 { // 디저트 카페
 
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++) {
-					startX = j;
-					startY = i;
-					
-					int nowDst=map[i][j];
-					check[nowDst]=true;
-					visit[i][j]=true;
-					
-					dfs(i, j, 0, 0, 1);
-					
-					check[nowDst]=false;
-					visit[i][j]=false;
-					
+					startI = i;
+					startJ = j;
+					dfs(i, j, 0, 0);
 				}
 			}
 			
@@ -77,5 +72,4 @@ public class Solution2105 { // 디저트 카페
 		}
 		sc.close();
 	}
-
 }
