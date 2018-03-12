@@ -16,30 +16,26 @@ public class Solution2105 { // 디저트 카페
 	}
 
 	public static void dfs(int i, int j, int depth, int direction) {
+		
 		for (int d = 0; d < 4; d++) {
-			int nextX = i + dir[d][0];
-			int nextY = j + dir[d][1];
+			int nextI = i + dir[d][0];
+			int nextJ = j + dir[d][1];
 			
-			if(nextX >= 0 && nextX < N && nextY >= 0 && nextY < N) {
-				
-				init();
-				
-				if(nextX == startI && nextY == startJ && depth > 3) {
+			if(nextI >= 0 && nextI < N && nextJ >= 0 && nextJ < N) {
+				if(nextI == startI && nextJ == startJ && depth > 3) {
 					if(depth > maxDessert) {
 						maxDessert = depth;
 					}
 					return;
 				}
-				
-				int nextDst = map[nextY][nextX];
+				int nextDst = map[nextI][nextJ];
 				if (check[nextDst] == false) {
 					check[nextDst] = true;
 					if(d!=direction) {
-						dfs(nextX, nextY, depth + 1, d);
+						dfs(nextI, nextJ, depth + 1, d);
 					}else {
-						dfs(nextX, nextY, depth, d);
+						dfs(nextI, nextJ, depth, d);
 					}
-					check[nextDst] = false;
 				}
 			}
 		}
@@ -67,7 +63,6 @@ public class Solution2105 { // 디저트 카페
 					dfs(i, j, 0, 0);
 				}
 			}
-			
 			System.out.println("#" + (t + 1) + " " + maxDessert);
 		}
 		sc.close();
