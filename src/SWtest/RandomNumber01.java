@@ -9,26 +9,19 @@ public class RandomNumber01 {
 		// TODO Auto-generated method stub
 		Random random = new Random();
 		Scanner sc = new Scanner(System.in);
-		
-		boolean[] arr = new boolean[30];
-		String[] nameArr = new String[30];
-		
-		for(int i = 1; i <= 29; i++) {
-			nameArr[i] = sc.next();
-		}
-		
+		boolean[] check = new boolean[30];
 		int count = 1;
-		boolean flag = true;
-		while(flag) {
+		while (true) {
 			int randNumber = random.nextInt(30);
-			if(randNumber > 0 && arr[randNumber] == false) {
-				arr[randNumber] = true;
-				System.out.println(nameArr[randNumber] + " : " + randNumber);
+			if (randNumber > 0 && check[randNumber] == false) {
+				check[randNumber] = true;
+				System.out.println(count + " : " + randNumber);
 				count++;
 			}
-			if(count == 29) {
-				flag = false;
-				System.out.println("ÃßÃ· Á¾·á");
+
+			if (count == 30) {
+				System.out.println("**************ÃßÃ· Á¾·á**************");
+				break;
 			}
 		}
 		sc.close();
