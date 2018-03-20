@@ -2,7 +2,7 @@ package SWtest;
 
 import java.util.Scanner;
 
-public class Solution1952 {	//¼ö¿µÀå
+public class Solution1952 {	// ìˆ˜ì˜ì¥
 
 	static int[] costs = new int[4];
 	static int[] plan = new int[13];

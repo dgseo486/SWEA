@@ -2,43 +2,15 @@ package SWtest;
 
 import java.util.Scanner;
 
-public class Solution2105 { // µðÀúÆ® Ä«Æä
+public class Solution2105 { // ë””ì €íŠ¸ì¹´íŽ˜
 
 	static int[][] map = new int[20][20];
 	static boolean[] check;
 	static int startI = 0, startJ = 0, N = 0, maxDessert;
-	static int[][] dir = { { 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } }; // ¿ìÇÏ, ÁÂÇÏ, ÁÂ»ó, ¿ì»ó
-
-	static void init() {
-		for (int i = 0; i < 101; i++) {
-			check[i] = false;
-		}
-	}
+	static int[][] dir = { { 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } };
 
 	public static void dfs(int i, int j, int depth, int direction) {
 		
-		for (int d = 0; d < 4; d++) {
-			int nextI = i + dir[d][0];
-			int nextJ = j + dir[d][1];
-			
-			if(nextI >= 0 && nextI < N && nextJ >= 0 && nextJ < N) {
-				if(nextI == startI && nextJ == startJ && depth > 3) {
-					if(depth > maxDessert) {
-						maxDessert = depth;
-					}
-					return;
-				}
-				int nextDst = map[nextI][nextJ];
-				if (check[nextDst] == false) {
-					check[nextDst] = true;
-					if(d!=direction) {
-						dfs(nextI, nextJ, depth + 1, d);
-					}else {
-						dfs(nextI, nextJ, depth, d);
-					}
-				}
-			}
-		}
 	}
 
 	public static void main(String[] args) {
