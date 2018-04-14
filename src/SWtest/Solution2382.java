@@ -24,15 +24,6 @@ public class Solution2382 {
                 map[I][J][1] = num;
             }
             
-            /*System.out.println();
-            
-            for(int i = 0; i < N; i++) {
-                for(int j = 0; j < N; j++) {
-                    System.out.printf("%d(%d)  ", map[i][j][1], map[i][j][0]);
-                }
-                System.out.println();
-            }*/
-
             //이동 방향 결정
             for(int m = 0; m < M; m++) {
                 for(int i = 0; i < N; i++) {
@@ -54,7 +45,7 @@ public class Solution2382 {
                                 nextMap[i + 1][j][0] = 1;
                             }
                         } else if(map[i][j][0] == 3) {
-                            if(map[i][j][1] > map[i][j - 1][1]) {
+                            if(map[i][j][1] > nextMap[i][j - 1][1]) {
                                 nextMap[i][j - 1][1] = map[i][j][1];
                                 nextMap[i][j - 1][0] = map[i][j][0];
                             }
@@ -62,7 +53,7 @@ public class Solution2382 {
                                 nextMap[i][j - 1][0] = 4;
                             }
                         } else if(map[i][j][0] == 4) {
-                            if(map[i][j][0] > map[i][j + 1][0]) {
+                            if(map[i][j][1] > nextMap[i][j + 1][1]) {
                                 nextMap[i][j + 1][1] = map[i][j][1];
                                 nextMap[i][j + 1][0] = map[i][j][0];
                             }
@@ -125,16 +116,6 @@ public class Solution2382 {
                         nextMap[i][j][1] = 0;
                     }
                 }
-                
-                
-                /*System.out.println();
-                
-                for(int i = 0; i < N; i++) {
-                    for(int j = 0; j < N; j++) {
-                        System.out.printf("%d(%d)  ", map[i][j][1], map[i][j][0]);
-                    }
-                    System.out.println();
-                }*/
             }
             
             int result = 0;
